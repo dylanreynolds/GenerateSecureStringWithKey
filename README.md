@@ -10,15 +10,15 @@ Creates a local admin using credentials key and secure key password txt file. (n
 Get-SecurePassword - credit to Author: Shawn Melton (@wsmelton)
 
 # .INSTRUCTIONS
-# (1) Create our key file
+(1) Create our key file
 <code> New-KeyFile -KeyFile .\MyKey.key -KeySize 16 </code>
-# (2) Create our password file
+(2) Create our password file
 <code> New-PasswordFile -PwdFile .\MyPwd.txt -Key (Get-Content .\MyKey.key) </code>
-# (3) Pull in the password to use
+(3) Pull in the password to use
 <code>$pwd = Get-SecurePassword -PwdFile .\MyPwd.txt -KeyFile .\MyKey.key </code>
  
-# build the PSCredential object
+build the PSCredential object
 <code> $mycred = New-Object System.Management.Automation.PSCredential("admin",$pwd) </code>
  
-# show the password was captured
+show the password was captured
 <code> $mycred.GetNetworkCredential().Password </code>

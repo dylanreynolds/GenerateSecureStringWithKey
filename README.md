@@ -11,14 +11,14 @@ Get-SecurePassword - credit to Author: Shawn Melton (@wsmelton)
 
 # .INSTRUCTIONS
 # (1) Create our key file
-New-KeyFile -KeyFile .\MyKey.key -KeySize 16
+<code> New-KeyFile -KeyFile .\MyKey.key -KeySize 16 <code>
 # (2) Create our password file
-New-PasswordFile -PwdFile .\MyPwd.txt -Key (Get-Content .\MyKey.key)
+<code> New-PasswordFile -PwdFile .\MyPwd.txt -Key (Get-Content .\MyKey.key) <code>
 # (3) Pull in the password to use
-$pwd = Get-SecurePassword -PwdFile .\MyPwd.txt -KeyFile .\MyKey.key
+<code>$pwd = Get-SecurePassword -PwdFile .\MyPwd.txt -KeyFile .\MyKey.key <code>
  
 # build the PSCredential object
-$mycred = New-Object System.Management.Automation.PSCredential("admin",$pwd)
+<code> $mycred = New-Object System.Management.Automation.PSCredential("admin",$pwd) <code>
  
 # show the password was captured
-$mycred.GetNetworkCredential().Password
+<code> $mycred.GetNetworkCredential().Password <code>

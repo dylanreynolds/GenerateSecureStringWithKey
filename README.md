@@ -8,3 +8,17 @@ Creates a local admin using credentials key and secure key password txt file. (n
 # .CREDIT 
 
 Get-SecurePassword - credit to Author: Shawn Melton (@wsmelton)
+
+# .INSTRUCTIONS
+# (1) Create our key file
+New-KeyFile -KeyFile .\MyKey.key -KeySize 16
+# (2) Create our password file
+New-PasswordFile -PwdFile .\MyPwd.txt -Key (Get-Content .\MyKey.key)
+# (3) Pull in the password to use
+$pwd = Get-SecurePassword -PwdFile .\MyPwd.txt -KeyFile .\MyKey.key
+ 
+# build the PSCredential object
+$mycred = New-Object System.Management.Automation.PSCredential("admin",$pwd)
+ 
+# show the password was captured
+$mycred.GetNetworkCredential().Password
